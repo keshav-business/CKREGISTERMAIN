@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Register Form</title>
+<link rel="stylesheet" href="/style.css">
+<style>
+  /* Hidden by default */
+  #submitContainer {
+    display: true;
+  }
+</style>
+</head>
+<body>
+
+<div class="container-02">
+  <div class="glassmorphic-card">
+    <div class="imgBox">
+      <img src="/YCF-1.png" alt="Custom Image" class="square-logo">
+    </div>
+    <div class="contentBox">
+      <h3>PAYMENT INSTRUCTIONS</h3>
+    </div>
+  </div>
+</div>
+
+<div class="container-02">
+  <div class="glassmorphic-card">
+    <div class="imgBox"></div>
+    <div class="contentBox">
+      <h3>GENERAL REGISTRATION</h3>
+      <form action="http://localhost:3000/register" method="post" id="generalRegistrationForm">
+
+        <input type="text" placeholder="Enter your name" id="username" name="username" required><br><br>
+   
+        <input type="email" placeholder="Enter your email" id="email" name="email" required><br><br>
+
+        <input type="tel" placeholder="Enter your phone number" id="phonenumber" name="phonenumber" required><br><br>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="container-02">
+  <div class="glassmorphic-card">
+    <div class="imgBox"></div>
+    <div class="contentBox">
+      <h3>PAYMENT REGISTRATION</h3>
+      <form action="http://localhost:3000/register" method="POST" id="paymentRegistrationForm">
+       
+        <input type="text" placeholder="Enter your UPI ID" id="upi-id" name="upi-id"><br><br>
+       
+        <input type="text" placeholder="Enter your transaction ID" id="transaction-id" name="transaction-id"><br><br>
+
+        <input type="file" accept="image/*" id="payment-screenshot" name="payment-screenshot"><br><br>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Submit button with glassmorphism effect -->
+<style>
+  .container-02 {
+      /* Define container styles */
+  }
+
+  .glassmorphic-card {
+      /* Define card styles */
+      text-align: center;
+      background-color: black;
+  }
+
+  .relative {
+      position: relative;
+  }
+
+  /* Define animation keyframes */
+  @keyframes fadeIn {
+      from {
+          opacity: 0;
+      }
+      to {
+          opacity: 1;
+      }
+  }
+
+  /* Apply animation to button */
+  #submitBtn {
+      padding: 0.5rem 1rem;
+      font-weight: 500;
+      color: white;
+      background-color: purple;
+      border: none;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: color 0.3s, background-color 0.3s;
+      animation: fadeIn 0.5s ease-out;
+  }
+
+  #submitBtn::before,
+  #submitBtn::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.3s, opacity 0.3s;
+      pointer-events: none;
+  }
+
+  #submitBtn::before {
+      background-color: rgba(255, 255, 255, 0.1);
+      transform: skewX(-12deg) translateX(-150%);
+  }
+
+  #submitBtn::after {
+      background-color: rgba(255, 255, 255, 0.1);
+      transform: skewX(12deg) translateX(150%);
+  }
+
+  #submitBtn:hover {
+      color: black;
+      background-color: #7c3aed;
+  }
+
+  #submitBtn:hover::before {
+      transform: skewX(-12deg) translateX(0);
+  }
+
+  #submitBtn:hover::after {
+      transform: skewX(12deg) translateX(0);
+  }
+</style>
+
+<div class="container-02">
+  <div class="glassmorphic-card" id="submitContainer">
+      <button id="submitBtn" type="button" onclick="submitForms()">SUBMIT NOW</button>
+  </div>
+</div>
+
+
+
+<script>
+  function submitForms() {
+    document.getElementById('generalRegistrationForm').submit();
+    document.getElementById('paymentRegistrationForm').submit();
+  }
+
+  function checkFields() {
+    const generalFilled = document.getElementById('username').value.trim() !== '' &&
+      document.getElementById('email').value.trim() !== '' &&
+      document.getElementById('phonenumber').value.trim() !== '';
+    const paymentFilled = document.getElementById('upi-id').value.trim() !== '' &&
+      document.getElementById('transaction-id').value.trim() !== '' &&
+      document.getElementById('payment-screenshot').value.trim() !== '';
+
+    const submitBtn = document.getElementById('submitBtn');
+    submitBtn.style.display = generalFilled && paymentFilled ? 'block' : 'none';
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('username').addEventListener('input', checkFields);
+    document.getElementById('email').addEventListener('input', checkFields);
+    document.getElementById('phonenumber').addEventListener('input', checkFields);
+    document.getElementById('upi-id').addEventListener('input', checkFields);
+    document.getElementById('transaction-id').addEventListener('input', checkFields);
+    document.getElementById('payment-screenshot').addEventListener('change', checkFields);
+  });
+</script>
+
+</body>
+</html>
